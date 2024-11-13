@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="mb-4">Manage Passwords</h2>
+
+    <!-- Table -->
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Website name/platform</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for password in passwords %}
+                <tr>
+                    <td>{{ password.website }}</td>
+                    <td>{{ password.username }}</td>
+                    <td>
+                        <!-- Password button ChatGPT -->
+                        <button class="btn btn-outline-secondary btn-sm" id="toggle-btn-{{ password.id }}" onclick="togglePassword({{ password.id }})">Show</button>
+                        <span id="password-{{ password.id }}" style="display:none;">{{ password.password }}</span>
+                    </td>
+                    <td>
+                        <!-- Edit and delete button -->
+                        <a href="{{ url_for('edit_password', password_id=password.id) }}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a href="{{ url_for('delete_password', password_id=password.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Opravdu chcete smazat toto heslo?')">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Add new account -->
+    <a href="{{ url_for('add_account') }}" class="btn btn-success mt-3">
+        <i class="bi bi-plus-circle"></i> Add new account
+    </a>
+
+    <script>
+        // Show / Hide button ChatGPT
+        function togglePassword(id) {
+            const passwordField = document.getElementById('password-' + id);
+            const toggleBtn = document.getElementById('toggle-btn-' + id);
+
+            // Show ChatGPT
+            if (passwordField.style.display === 'none') {
+                passwordField.style.display = 'inline';
+                toggleBtn.textContent = 'Hide';
+            } else {
+                // Hide ChatGPT
+                passwordField.style.display = 'none';
+                toggleBtn.textContent = 'Show';
+            }
+        }
+    </script>
+{% endblock %}

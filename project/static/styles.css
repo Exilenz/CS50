@@ -1,0 +1,30 @@
+<style>
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .btn-sm {
+        margin-right: 5px;
+    }
+
+    .btn-warning, .btn-danger {
+        width: 80px; 
+    }
+
+    .btn-outline-secondary {
+        width: 100px;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+
+    .table-bordered {
+        border-radius: 10px;
+    }
+
+    .btn {
+        border-radius: 5px;
+    }
+</style>

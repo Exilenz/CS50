@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Account</h2>
+
+<form method="POST">
+    <!-- Website/platform -->
+    <div class="mb-3">
+        <label for="website" class="form-label">Website/Platform</label>
+        <input type="text" class="form-control" id="website" name="website" value="{{ password['website'] }}" required>
+    </div>
+
+    <!-- Username -->
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" value="{{ password['username'] }}" required>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" class="form-control" id="password" name="password" value="{{ password['password'] }}" required>
+    </div>
+
+    <!-- Generate strong password button -->
+    <button type="button" class="btn btn-secondary" onclick="generatePassword()">Generate strong password</button>
+
+    <!-- Apply button -->
+    <button type="submit" class="btn btn-primary">Apply</button>
+</form>
+
+<script>
+function generatePassword() {
+    // Volání generování silného hesla pomocí AJAX
+    fetch("/generate_password")
+        .then(response => response.text())
+        .then(password => {
+            document.getElementById("password").value = password;
+        });
+}
+</script>
+
+{% endblock %}

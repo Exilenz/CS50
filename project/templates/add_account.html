@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add new account</h2>
+
+<form method="POST">
+    <!-- Website/platform -->
+    <div class="mb-3">
+        <label for="website" class="form-label">Website/platform</label>
+        <input type="text" class="form-control" id="website" name="website" required>
+    </div>
+
+    <!-- Username -->
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" class="form-control" id="password" name="password" required>
+    </div>
+
+    <!-- Generate strong password button -->
+    <button type="button" class="btn btn-secondary" onclick="generatePassword()">Generate Strong Password</button>
+
+    <!-- Add Account button -->
+    <button type="submit" class="btn btn-primary">Add Account</button>
+</form>
+
+<script>
+function generatePassword() {
+    // ChatGPT script for strong password
+    fetch("/generate_password")
+        .then(response => response.text())
+        .then(password => {
+            document.getElementById("password").value = password;
+        });
+}
+</script>
+
+{% endblock %}
+
